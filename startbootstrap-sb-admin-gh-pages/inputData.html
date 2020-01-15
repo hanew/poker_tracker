@@ -100,27 +100,11 @@
   }
 
   function submitForm(){
-    data = {
-        buyin : $('#buyin').val(),
-        cashout : $('#cashout').val(),
-        littleblind : $('#littleblind').val(),
-        bigblind : $('#bigblind').val(),
-        startime : $('#startime').val(),
-        endtime : $('#endtime').val(),
-        location : $('#location').val()
-      }
+      data = $("#myform").serializeArray();
       $.ajax({
       type: "POST",
       url: 'http://localhost:5002/addSession',
-      data: data = JSON.stringify({
-        buyin : $('#buyin').val(),
-        cashout : $('#cashout').val(),
-        littleblind : $('#littleblind').val(),
-        bigblind : $('#bigblind').val(),
-        startime : $('#startime').val(),
-        endtime : $('#endtime').val(),
-        location : $('#location').val()
-      }),
+      data: JSON.stringify(data)
       success: function(){},
       dataType: "json",
       contentType: "application/json"
