@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Register</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark">
+
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Add a Poker Session</div>
+      <div class="card-body">
+        <form enctype='application/json' method="post" name="theform" id="myfrm" class="form_class"> 
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                 <input type="text" id="buyin" name="buyin" class="form-control" placeholder="Buy-in" required="required" autofocus="autofocus">
+                  <label for="buyin">Buy-in</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="cashout" name="cashout" class="form-control" placeholder="Cash out" required="required">
+                  <label for="cashout">Cash Out</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="littleblind" name="littleblind" class="form-control" placeholder="Little Blind" required="required" autofocus="autofocus">
+                  <label for="littleblind">Little Blind</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="bigblind" name="bigblind" class="form-control" placeholder="Big Blind" required="required">
+                  <label for="bigblind">Big Blind</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="form-label-group">
+                <input type="text" id="location" name="location" class="form-control" placeholder="Location" required="required">
+                <label for="location">Location</label>
+              </div>
+          </div>
+           <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="datetime-local" name="startime" id="startime" class="form-control" placeholder="Start Time" required="required" autofocus="autofocus">
+                  <label for="starttime">Starttime</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="datetime-local" name="endtime" id="endtime" class="form-control" placeholder="End Time" required="required">
+                  <label for="endtime">Endtime</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input  class="btn btn-primary btn-block" type="submit" value="submit" onclick="submitForm()" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  function formData(){
+    buyin = document.getElementById('buyin').value;
+    cashout = document.getElementById('cashout').value;
+    littleblind = document.getElementById('littleblind').value;
+    bigblind = document.getElementById('bigblind').value;
+    starttime = document.getElementById('starttime').value;
+    endtime = document.getElementById('endtime').value;
+    loc = document.getElementById('location').value; 
+    var formData = JSON.stringify($("#myform").serializeArray());
+    alert("buyin = " + buyin + "\ncashout = " + cashout + "\nLittleblind = " + littleblind + "\nBig Blind = " + bigblind + "\nLocation = " + loc + "\nStarttime: " + startime + "\nendtime: " + endtime)
+  }
+
+  function submitForm(){
+    data = {
+        buyin : $('#buyin').val(),
+        cashout : $('#cashout').val(),
+        littleblind : $('#littleblind').val(),
+        bigblind : $('#bigblind').val(),
+        startime : $('#startime').val(),
+        endtime : $('#endtime').val(),
+        location : $('#location').val()
+      }
+      $.ajax({
+      type: "POST",
+      url: 'http://localhost:5002/addSession',
+      data: data = JSON.stringify({
+        buyin : $('#buyin').val(),
+        cashout : $('#cashout').val(),
+        littleblind : $('#littleblind').val(),
+        bigblind : $('#bigblind').val(),
+        startime : $('#startime').val(),
+        endtime : $('#endtime').val(),
+        location : $('#location').val()
+      }),
+      success: function(){},
+      dataType: "json",
+      contentType: "application/json"
+    }) 
+  }
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+</body>
+
+</html>
