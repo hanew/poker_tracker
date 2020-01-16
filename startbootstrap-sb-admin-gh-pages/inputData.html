@@ -99,23 +99,43 @@
   }
 
   function submitForm(){
-      data = $("#myform").serializeArray();
-      $.ajax({
-      type: "POST",
-      url: 'http://localhost:5002/addSession',
-      data: JSON.stringify({
-        buyin: $('#buyin'),
-        cashout: $('#cashout'),
-        littleblind: $('#littleblind'),
-        bigblind: $('#bigblind'),
-        location: $('#location'),
-        startime: $('#startime'),
-        endtime: $('#endtime')
-      }),
-      success: function(){},
-      dataType: "json",
-      contentType: "application/json"
-    }) 
+    buyin = document.getElementById('buyin').value;
+    cashout = document.getElementById('cashout').value;
+    littleblind = document.getElementById('littleblind').value;
+    bigblind = document.getElementById('bigblind').value;
+    starttime = document.getElementById('startime').value;
+    endtime = document.getElementById('endtime').value;
+    loc = document.getElementById('location').value; 
+    console.log(JSON.stringify({
+      buyin: buyin,
+      cashout: cashout,
+      littleblind: littleblind,
+      bigblind: bigblind,
+      location: loc,
+      startime: starttime,
+      endtime: endtime
+    }))
+
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:5002/addSession";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json);
+        }
+    };
+    var data = JSON.stringify({
+        buyin: buyin,
+        cashout: cashout,
+        littleblind: littleblind,
+        bigblind: bigblind,
+        location: loc,
+        startime: starttime,
+        endtime: endtime
+      })
+      xhr.send(data);
   }
 
 </script>
