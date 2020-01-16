@@ -95,7 +95,6 @@
     starttime = document.getElementById('starttime').value;
     endtime = document.getElementById('endtime').value;
     loc = document.getElementById('location').value; 
-    var formData = JSON.stringify($("#myform").serializeArray());
     alert("buyin = " + buyin + "\ncashout = " + cashout + "\nLittleblind = " + littleblind + "\nBig Blind = " + bigblind + "\nLocation = " + loc + "\nStarttime: " + startime + "\nendtime: " + endtime)
   }
 
@@ -104,7 +103,15 @@
       $.ajax({
       type: "POST",
       url: 'http://localhost:5002/addSession',
-      data: JSON.stringify(data)
+      data: JSON.stringify({
+        buyin: $('#buyin'),
+        cashout: $('#cashout'),
+        littleblind: $('#littleblind'),
+        bigblind: $('#bigblind'),
+        location: $('#location'),
+        startime: $('#startime'),
+        endtime: $('#endtime')
+      }),
       success: function(){},
       dataType: "json",
       contentType: "application/json"

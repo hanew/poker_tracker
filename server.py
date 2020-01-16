@@ -5,6 +5,7 @@ from json import dumps
 from flask_jsonpify import jsonify
 import db_accessor
 from flask_cors import CORS
+# import json
 
 #db_connect = create_engine('sqlite:///chinook.db')
 app = Flask(__name__)
@@ -39,14 +40,16 @@ class All_Data(Resource):
 class Add_Session(Resource):
 	def post(self):
 		import pdb; pdb.set_trace();
-		buyin = request.form['buyin']
-		cashout = request.form['cashout']
-		location = request.form['location']
-		bigblind = request.form['bigblind']
-		littleblind = request.form['littleblind']
-		startime = request.form['startime']
-		endtime = request.form['endtime']
+		# json.dumps('form')
+		buyin = request.json['buyin']
+		cashout = request.json['cashout']
+		location = request.json['location']
+		bigblind = request.json['bigblind']
+		littleblind = request.json['littleblind']
+		startime = request.json['startime']
+		endtime = request.json['endtime']
 		results = db_accessor.insert_row(buyin,cashout,location,bigblind,littleblind,startime,endtime)
+		import pdb; pdb.set_trace()
 		return jsonify(results)
 
 api.add_resource(All_Data, '/all') # Route_1

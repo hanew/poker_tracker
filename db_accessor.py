@@ -58,7 +58,7 @@ def insert_row(buyin, cashout, location, bigblind, littleblind, startime, endtim
 	mycursor = db.cursor()
 	
 	sql = "INSERT INTO poker_app(buy_in, cash_out, net_gain, location, big_blind, little_blind, startime, endtime) values(%s, %s, %s, %s, %s, %s, %s, %s)"
-	val = (buyin, cashout, cashout-buyin, location, bigblind, littleblind, startime, endtime)
+	val = (buyin, cashout, (cashout)-(buyin), location, bigblind, littleblind, startime, endtime)
 	mycursor.execute(sql, val)
 
 	db.commit()
