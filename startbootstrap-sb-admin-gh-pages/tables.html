@@ -140,36 +140,23 @@
           <div class="card-header">
             <i class="fas fa-table"></i>
             Data Table Example</div>
+             <input  class="btn btn-primary btn-block" type="submit" value="Refresh Table" onclick="refresh()" />
           <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive">        
               <table class="table table-bordered" id="table" name="table" width="100%" cellspacing="0">
-                <thead>
+                <thead> 
                   <tr>
-                    <th>Buy-in</th>
+                    <th onclick="refresh()">Buy-in</th>
                     <th>Cash out</th>
                     <th>Net Gain</th>
+                    <th>Location</th>
                     <th>Little Blind</th>
                     <th>Big Blind</th>
                     <th>Starttime</th>
                     <th>Endtime</th>
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Buy-in</th>
-                    <th>Cash out</th>
-                    <th>Net Gain</th>
-                    <th>Little Blind</th>
-                    <th>Big Blind</th>
-                    <th>Starttime</th>
-                    <th>Endtime</th>
-                  </tr>
-                </tfoot>
                 <tbody>
-                  <tr>
-                    <th></t>
-                    <th></th>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -223,23 +210,64 @@
     </div>
   </div>
 
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
   <script type="text/javascript">
-    let xhr = new XMLHttpRequest();
-    var url = "http://localhost:5002/all";
-    xhr.open('GET', url)
-    xhr.send()
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState==4 && xhr.status==200) {
-        var content = xhr.responseText;
-        var node = document.createElement("tr");
-        var textNode = document.createTextNode(content);
-        node.appendChild(textNode);
-        document.getElementById("table").appendChild(node)
-      }
-    }
+    function refresh(){
+      let xhr = new XMLHttpRequest();
+      var url = "http://localhost:5002/all";
+      xhr.open('GET', url)
+      xhr.send()
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState==4 && xhr.status==200) {
+          var data = JSON.parse(xhr.responseText);
+          console.log(data.length)
 
+          // tableRef = document.getElementById('table')
+          // var newRow   = tableRef.insertRow();
+          // // Insert a cell in the row at index 0
+          // var cell0 = newRow.insertCell();
+          // var cell1 = newRow.insertCell();
+          // var cell2  = newRow.insertCell();
+          // var cell3  = newRow.insertCell();
+          // var cell4  = newRow.insertCell();
+          // var cell5  = newRow.insertCell();
+          // var cell6  = newRow.insertCell();
+          // var cell7  = newRow.insertCell();
+          for (i = 0; i< data.length; i++){
+            tableRef = document.getElementById('table')
+            var newRow   = tableRef.insertRow();
+          // Insert a cell in the row at index 0
+            var cell0 = newRow.insertCell();
+            var cell1 = newRow.insertCell();
+            var cell2  = newRow.insertCell();
+            var cell3  = newRow.insertCell();
+            var cell4  = newRow.insertCell();
+            var cell5  = newRow.insertCell();
+            var cell6  = newRow.insertCell();
+            var cell7  = newRow.insertCell();
+            var co  = document.createTextNode(data[i].cash_out),
+            bi = document.createTextNode(data[i].buy_in),
+            loc = document.createTextNode(data[i].location)
+            bb = document.createTextNode(data[i].big_blind)
+            lb = document.createTextNode(data[i].little_blind)
+            loc = document.createTextNode(data[i].location)
+            ng = document.createTextNode(data[i].net_gain)
+            st =  document.createTextNode(data[i].startime)
+            et = document.createTextNode(data[i].endtime)
+
+              cell0.appendChild(bi);
+              cell1.appendChild(co);
+              cell2.appendChild(ng);
+              cell3.appendChild(loc);
+              cell4.appendChild(lb);
+              cell5.appendChild(bb);
+              cell6.appendChild(st);
+              cell7.appendChild(et);
+            }
+          }
+        }
+      }
   </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"> </script>
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

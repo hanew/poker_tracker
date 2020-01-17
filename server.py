@@ -5,7 +5,6 @@ from json import dumps
 from flask_jsonpify import jsonify
 import db_accessor
 from flask_cors import CORS
-import json
 
 #db_connect = create_engine('sqlite:///chinook.db')
 app = Flask(__name__)
