@@ -296,8 +296,8 @@
     xhr.open('GET', url)
     xhr.send()
     xhr.onload = function() {
-    var tableInfo = JSON.parse(xhr.responseText);
-   console.log(tableInfo);  
+    var tableInfo = xhr.responseText;
+    console.log(tableInfo);
     }
   </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
